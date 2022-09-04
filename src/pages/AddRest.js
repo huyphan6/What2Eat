@@ -10,6 +10,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { Button, TextField, Stack, Box } from "@mui/material";
+import NavBar from "../components/NavBar";
 
 const AddRest = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -19,6 +20,7 @@ const AddRest = () => {
   const [newType, setNewType] = useState("");
   const [newLocation, setNewLocation] = useState("");
   const [newHours, setNewHours] = useState("");
+  const [newPrice, setNewPrice] = useState("");
 
   useEffect(() => {
     const getRestaurants = async () => {
@@ -36,6 +38,7 @@ const AddRest = () => {
         Type: newType,
         Location: newLocation,
         Hours: newHours,
+        Price: newPrice,
       });
       console.log("Restaurant created sucessfully");
     } catch (err) {
@@ -45,6 +48,7 @@ const AddRest = () => {
 
   return (
     <div className="App">
+        <NavBar/>
       <Box
         display="flex"
         flexDirection="column"
@@ -87,24 +91,19 @@ const AddRest = () => {
               setNewHours(e.target.value);
             }}
           />
+          <TextField
+            variant="outlined"
+            label="Price"
+            onChange={(e) => {
+              setNewPrice(e.target.value);
+            }}
+          />
 
           <Button onClick={createRestaurant} variant="contained">
             Add restaurant
           </Button>
         </Stack>
       </Box>
-
-      {restaurants.map((restaurants) => {
-        return (
-          <div>
-            <h1> Name: {restaurants.Name} </h1>
-            <h1> Type: {restaurants.Type} </h1>
-            <h1> Location: {restaurants.Location} </h1>
-            <h1> Hours: {restaurants.Hours} </h1>
-            -----------------------------------------------------
-          </div>
-        );
-      })}
     </div>
   );
 };
