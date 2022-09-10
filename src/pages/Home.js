@@ -4,10 +4,19 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const homeStyle = {
+    backgroundImage: "url(" + require("../images/food.jpg") + ")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    opacity: "0.9",
+    width: "100vw",
+    height: "100vh",
+  };
 
   return (
-    <div>
-      <Box display="flex" justifyContent="center" mt={5} mx={"auto"}>
+    <div style={homeStyle}>
+      <Box display="flex" justifyContent="center"  mx={"auto"}>
         <Stack
           spacing={2}
           mx={4}
@@ -15,15 +24,25 @@ const Home = () => {
           justifyContent="center"
           direction="column"
         >
-          <Typography variant="h2" mb={2}>
+          <Typography variant="h2" mb={2} mt={40} style={{fontWeight: 'bold'}}>
             Welcome to What2Eat!
           </Typography>
           <Stack direction="row" spacing={2}>
             <Button variant="contained" onClick={() => navigate("/search")}>
               Find a restaurant
             </Button>
-            <Button variant="contained" onClick={() => navigate("/addNewRestaurant")}>Add a restaurant</Button>
-            <Button variant="contained" onClick={() => navigate("/restaurants")}>See current restaurants</Button>
+            <Button
+              variant="contained"
+              onClick={() => navigate("/addNewRestaurant")}
+            >
+              Add a restaurant
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => navigate("/restaurants")}
+            >
+              See current restaurants
+            </Button>
           </Stack>
         </Stack>
       </Box>
