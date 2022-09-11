@@ -5,11 +5,10 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   const homeStyle = {
-    backgroundImage: "url(" + require("../images/food.jpg") + ")",
+    backgroundImage: "url(" + require("../images/food2.jpg") + ")",
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    opacity: "0.9",
     width: "100vw",
     height: "100vh",
   };
@@ -24,7 +23,7 @@ const Home = () => {
           justifyContent="center"
           direction="column"
         >
-          <Typography variant="h2" mb={2} mt={40} style={{fontWeight: 'bold'}}>
+          <Typography variant="h2" mb={2} mt={40} style={{fontWeight: 'bold', color: "#F5F5F4"}}>
             Welcome to What2Eat!
           </Typography>
           <Stack direction="row" spacing={2}>

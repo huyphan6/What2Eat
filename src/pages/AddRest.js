@@ -22,6 +22,28 @@ const AddRest = () => {
   const [newHours, setNewHours] = useState("");
   const [newPrice, setNewPrice] = useState("");
 
+  const clearForm = () => {
+    setNewName("");
+    setNewType("");
+    setNewLocation("");
+    setNewHours("");
+    setNewPrice("");
+    console.log("cleared form")
+  }
+
+  const refreshPage = () => {
+    setTimeout(window.location.reload(), 5000);
+  }
+
+  const homeStyle = {
+    backgroundImage: "url(" + require("../images/food3.jpg") + ")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    width: "100vw",
+    height: "100vh",
+  };
+
   useEffect(() => {
     const getRestaurants = async () => {
       const data = await getDocs(restaurantDB);
@@ -47,7 +69,7 @@ const AddRest = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={homeStyle}>
         <NavBar/>
       <Box
         display="flex"
@@ -58,6 +80,7 @@ const AddRest = () => {
       >
         <Stack
           spacing={2}
+          mt={20}
           mx={4}
           alignItems="center"
           justifyContent="center"
@@ -69,6 +92,7 @@ const AddRest = () => {
             onChange={(e) => {
               setNewName(e.target.value);
             }}
+            value={newName}
           />
           <TextField
             variant="outlined"
@@ -76,6 +100,7 @@ const AddRest = () => {
             onChange={(e) => {
               setNewType(e.target.value);
             }}
+            value={newType}
           />
           <TextField
             variant="outlined"
@@ -83,6 +108,7 @@ const AddRest = () => {
             onChange={(e) => {
               setNewLocation(e.target.value);
             }}
+            value={newLocation}
           />
           <TextField
             variant="outlined"
@@ -90,6 +116,7 @@ const AddRest = () => {
             onChange={(e) => {
               setNewHours(e.target.value);
             }}
+            value={newHours}
           />
           <TextField
             variant="outlined"
@@ -97,9 +124,10 @@ const AddRest = () => {
             onChange={(e) => {
               setNewPrice(e.target.value);
             }}
+            value={newPrice}
           />
 
-          <Button onClick={createRestaurant} variant="contained">
+          <Button onClick={() => {createRestaurant(); clearForm();}} variant="contained">
             Add restaurant
           </Button>
         </Stack>

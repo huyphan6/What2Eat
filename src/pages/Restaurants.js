@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { Button, TextField, Stack, Box, Typography } from "@mui/material";
 import NavBar from "../components/NavBar";
+import Carousel from "react-material-ui-carousel";
 
 const Restaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -25,29 +26,41 @@ const Restaurants = () => {
     getRestaurants();
   }, []);
 
+  const homeStyle = {
+    backgroundImage: "url(" + require("../images/food5.jpg") + ")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    width: "100vw",
+    height: "100vh",
+  };
+
   return (
-    <div>
-      <NavBar mb={20}/>
+    <div style={homeStyle}>
+      <NavBar mb={20} />
       {restaurants.map((restaurants) => {
         return (
-          <div >
-            <Stack
-              alignItems="center"
-              justifyContent="center"
-              direction="column"
-              mx={2}
-            >
-              <Typography variant="h6"> Name: {restaurants.Name} </Typography>
-              <Typography variant="h6"> Type: {restaurants.Type} </Typography>
-              <Typography variant="h6">
-                Location: {restaurants.Location}{" "}
-              </Typography>
-              <Typography variant="h6"> Hours: {restaurants.Hours} </Typography>
-              <Typography variant="h6"> Price: {restaurants.Price} </Typography>
-              <Typography>
-                ------------------------------------------
-              </Typography>
-            </Stack>
+          <div>
+            <Carousel>
+              <Stack alignItems="flex-end" direction="column" mx={10}>
+                <Typography variant="h6"> Name: {restaurants.Name} </Typography>
+                <Typography variant="h6"> Type: {restaurants.Type} </Typography>
+                <Typography variant="h6">
+                  Location: {restaurants.Location}{" "}
+                </Typography>
+                <Typography variant="h6">
+                  {" "}
+                  Hours: {restaurants.Hours}{" "}
+                </Typography>
+                <Typography variant="h6">
+                  {" "}
+                  Price: {restaurants.Price}{" "}
+                </Typography>
+                <Typography>
+                  ------------------------------------------
+                </Typography>
+              </Stack>
+            </Carousel>
           </div>
         );
       })}

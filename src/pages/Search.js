@@ -1,33 +1,111 @@
-import React from 'react'
+import React from "react";
 import { Typography, Box, TextField, Stack, Button } from "@mui/material";
-import NavBar from '../components/NavBar'
+import NavBar from "../components/NavBar";
+import { db } from "../firebase-config";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+  query,
+  QuerySnapshot,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 const Search = () => {
+  const restaurantDB = collection(db, "restaurants");
+  const [userInput, setUserInput] = React.useState("");
+  const [results, setResults] = React.useState([]);
+
+  // queries
+  const q = query(restaurantDB, where("Type", "==", userInput));
+
+  const snapshot = async () => {
+    const res = await getDocs(q);
+    setResults(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    // console.log(res.docs[0].data())
+  };
+
+  const homeStyle = {
+    backgroundImage: "url(" + require("../images/food6.jpg") + ")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    width: "100vw",
+    height: "100vh",
+  };
+
   return (
-    <div>
-    <Box display="flex" justifyContent="center" mt={5} mx={"auto"}>
-        <NavBar />
-      <Stack
-        spacing={2}
-        mx={4}
-        alignItems="center"
+    <div style={homeStyle}>
+      <Box
+        display="flex"
+        flexDirection="column"
         justifyContent="center"
-        direction="column"
+        mx={"auto"}
       >
+        <NavBar fullwidth alignItems="center" />
+        <Stack
+          spacing={2}
+          mt={4}
+          mx={4}
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+        >
+          <Typography variant="h2">I'm in the mood for</Typography>
 
-        <Typography variant="h6" mb={2}>
-          What are you in the mood for today?
-        </Typography>
+          <TextField
+            variant="outlined"
+            label="Insert Type"
+            mb={2}
+            onChange={(e) => {
+              setUserInput(e.target.value);
+            }}
+          />
 
-        <TextField variant="outlined" label="Search By Type" />
-        <TextField variant="outlined" label="Search By Location" />
-        <TextField variant="outlined" label="Search By Hours" />
+          <Button
+            variant="contained"
+            mt={4}
+            size="large"
+            sx={{ fontSize: 18 }}
+            onClick={snapshot}
+          >
+            Find
+          </Button>
 
-        <Button variant="contained">Find</Button>
-      </Stack>
-    </Box>
-  </div>
-  )
-}
+          {results.map((results) => {
+          return (
+            <div>
+              <Stack alignItems="flex-end" direction="column" mx={10}>
+                <Typography variant="h6"> Name: {results.Name} </Typography>
+                <Typography variant="h6"> Type: {results.Type} </Typography>
+                <Typography variant="h6">
+                  Location: {results.Location}{" "}
+                </Typography>
+                <Typography variant="h6">
+                  {" "}
+                  Hours: {results.Hours}{" "}
+                </Typography>
+                <Typography variant="h6">
+                  {" "}
+                  Price: {results.Price}{" "}
+                </Typography>
+                <Typography>
+                  ------------------------------------------
+                </Typography>
+              </Stack>
+            </div>
+          );
+        })}
+        </Stack>
 
-export default Search
+        
+      </Box>
+    </div>
+  );
+};
+
+export default Search;
