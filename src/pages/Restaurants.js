@@ -42,22 +42,19 @@ const Restaurants = () => {
         return (
           <div>
             <Carousel>
-              <Stack alignItems="flex-end" direction="column" mx={10}>
-                <Typography variant="h6"> Name: {restaurants.Name} </Typography>
+              <Stack alignItems="flex-end" direction="column" mr={6}>
+                <Typography variant="h6">Name: {restaurants.Name} </Typography>
                 <Typography variant="h6"> Type: {restaurants.Type} </Typography>
                 <Typography variant="h6">
-                  Location: {restaurants.Location}{" "}
+                  Location: {restaurants.Location}
                 </Typography>
                 <Typography variant="h6">
-                  {" "}
-                  Hours: {restaurants.Hours}{" "}
+                  
+                  Hours: {restaurants.Hours}
                 </Typography>
                 <Typography variant="h6">
-                  {" "}
-                  Price: {restaurants.Price}{" "}
-                </Typography>
-                <Typography>
-                  ------------------------------------------
+                  
+                  Price: {restaurants.Price}
                 </Typography>
               </Stack>
             </Carousel>

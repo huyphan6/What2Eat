@@ -5,6 +5,8 @@ import {
   collection,
   getDocs,
   addDoc,
+  query,
+  where,
   updateDoc,
   deleteDoc,
   doc,
@@ -28,12 +30,8 @@ const AddRest = () => {
     setNewLocation("");
     setNewHours("");
     setNewPrice("");
-    console.log("cleared form")
-  }
-
-  const refreshPage = () => {
-    setTimeout(window.location.reload(), 5000);
-  }
+    console.log("cleared form");
+  };
 
   const homeStyle = {
     backgroundImage: "url(" + require("../images/food3.jpg") + ")",
@@ -53,16 +51,24 @@ const AddRest = () => {
     getRestaurants();
   }, []);
 
+  const q = query(restaurantDB, where("Name", "==", newName));
+
   const createRestaurant = async () => {
     try {
-      await addDoc(restaurantDB, {
-        Name: newName,
-        Type: newType,
-        Location: newLocation,
-        Hours: newHours,
-        Price: newPrice,
-      });
-      console.log("Restaurant created sucessfully");
+      const res = await getDocs(q);
+      if (res.docs.length > 0) {
+        alert("This restaurant already exists, Please try again");
+        console.log("Restaurant already exists");
+      } else {
+        await addDoc(restaurantDB, {
+          Name: newName,
+          Type: newType,
+          Location: newLocation,
+          Hours: newHours,
+          Price: newPrice,
+        });
+        console.log("Restaurant created sucessfully");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -70,7 +76,7 @@ const AddRest = () => {
 
   return (
     <div className="App" style={homeStyle}>
-        <NavBar/>
+      <NavBar />
       <Box
         display="flex"
         flexDirection="column"
@@ -127,7 +133,13 @@ const AddRest = () => {
             value={newPrice}
           />
 
-          <Button onClick={() => {createRestaurant(); clearForm();}} variant="contained">
+          <Button
+            onClick={() => {
+              createRestaurant();
+              clearForm();
+            }}
+            variant="contained"
+          >
             Add restaurant
           </Button>
         </Stack>

@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <div style={homeStyle}>
-      <Box display="flex" justifyContent="center"  mx={"auto"}>
+      <Box display="flex" justifyContent="center" mx={"auto"}>
         <Stack
           spacing={2}
           mx={4}
@@ -23,24 +23,29 @@ const Home = () => {
           justifyContent="center"
           direction="column"
         >
-          <Typography variant="h2" mb={2} mt={40} style={{fontWeight: 'bold', color: "#F5F5F4"}}>
+          <Typography
+            variant="h2"
+            mb={2}
+            mt={40}
+            style={{ fontWeight: "bold", color: "#F5F5F4" }}
+          >
             Welcome to What2Eat!
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" onClick={() => navigate("/search")}>
-              Find a restaurant
-            </Button>
             <Button
               variant="contained"
               onClick={() => navigate("/addNewRestaurant")}
             >
               Add a restaurant
             </Button>
+            <Button variant="contained" onClick={() => navigate("/search")}>
+              Find a restaurant
+            </Button>
             <Button
               variant="contained"
               onClick={() => navigate("/restaurants")}
             >
-              See current restaurants
+              See all restaurants
             </Button>
           </Stack>
         </Stack>

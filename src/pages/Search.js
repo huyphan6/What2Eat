@@ -77,32 +77,22 @@ const Search = () => {
           </Button>
 
           {results.map((results) => {
-          return (
-            <div>
-              <Stack alignItems="flex-end" direction="column" mx={10}>
-                <Typography variant="h6"> Name: {results.Name} </Typography>
-                <Typography variant="h6"> Type: {results.Type} </Typography>
-                <Typography variant="h6">
-                  Location: {results.Location}{" "}
-                </Typography>
-                <Typography variant="h6">
-                  {" "}
-                  Hours: {results.Hours}{" "}
-                </Typography>
-                <Typography variant="h6">
-                  {" "}
-                  Price: {results.Price}{" "}
-                </Typography>
-                <Typography>
-                  ------------------------------------------
-                </Typography>
-              </Stack>
-            </div>
-          );
-        })}
+            return (
+              <div>
+                <Stack alignItems="flex-end" direction="column" mx={10}>
+                  <Typography variant="h6"> Name: {results.Name} </Typography>
+                  <Typography variant="h6"> Type: {results.Type} </Typography>
+                  <Typography variant="h6">
+                    {" "}
+                    Location: {results.Location}{" "}
+                  </Typography>
+                  <Typography variant="h6"> Hours: {results.Hours} </Typography>
+                  <Typography variant="h6"> Price: {results.Price} </Typography>
+                </Stack>
+              </div>
+            );
+          })}
         </Stack>
-
-        
       </Box>
     </div>
   );
